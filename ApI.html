@@ -1,0 +1,52 @@
+<!-- The given code is an HTML document that makes an API call to retrieve data from the
+"https://datausa.io/api/data?drilldowns=Nation&measures=Population" endpoint. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      async function CallApI() {
+        let result = await fetch(
+          "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
+        );
+        result = await result.json();
+        console.warn(result);
+
+        document.getElementById("x").innerHTML = result.data.map(function (
+          user
+        ) {
+          return `<tr>
+                <td>${user.IDNation}</td>
+                <td>${user.IDYear}</td>
+                <td>${user.Nation}</td>
+                <td>${user.Population}</td>
+                <td>${user.SlugPopulation}</td>
+                <td>${user.Year}</td>
+            </tr>`;
+        });
+      }
+
+      CallApI();
+    </script>
+  </head>
+  <body>
+    <h1>API Call in JavaScript......</h1>
+
+    <table border="1px">
+      <thead>
+        <tr>
+          <th>ID Nation</th>
+          <th>IDYear</th>
+          <th>Nation</th>
+          <th>Population</th>
+          <th>SlugPopulation</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+
+      <tbody id="x"></tbody>
+    </table>
+  </body>
+</html>
